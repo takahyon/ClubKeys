@@ -19,12 +19,12 @@ Parameters:
 #       Type: Canary10Percent5Minutes
 
 Resources:
-  HelloWorld:
+  ClubKeys:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
       Runtime: python3.6
-      Role:
+      Role:　
         Fn::ImportValue:
           !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
       Events:
