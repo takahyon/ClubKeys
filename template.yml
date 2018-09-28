@@ -39,7 +39,7 @@ Resources:
             Path: /
             Method: post
   ClubKeys:
-    Type: AWS::Serverless::Function
+    Type: AWS::Lambda::Function
     Properties:
       Handler: index.handler
       Runtime: python3.6
