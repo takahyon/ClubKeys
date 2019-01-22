@@ -13,5 +13,3 @@ class TestHandlerCase(unittest.TestCase):
         #self.assertIn('Hello World', result['body'])
 
 
-if __name__ == '__main__':
-    unittest.main()
