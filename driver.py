@@ -2,8 +2,8 @@ import json
 import lambda_function
 import os
 
-os.environ["LINE_CHANNEL_ACCESS_TOKEN"] = "+2GGt4kH9/5aGzibThB5e8v7X3AkNa1gZ+oH4mOYWyKHbahDTrB9utxJQDMjBen2M5HXQsWfLJ5wWjebChl3iDectyfvkvYCweKq0gaeP+jGV2Y3BWTEM+4cBEaBLfpzCYPAQzbUmbDesANwqygXyQdB04t89/1O/w1cDnyilFU="
-os.environ["SlackUrl"] = "https://hooks.slack.com/services/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"
+os.environ["LINE_CHANNEL_ACCESS_TOKEN"] = "HogeHoge"
+os.environ["SlackUrl"] = "HogeHoge"
 
 json = {
    "events": [
