@@ -5,16 +5,21 @@ import line
 
 def post_slack(event, username=None):
     # TODO implement
-    url = os.environ["SlackUrl"]
+    url = os.environ["SlackURL"]
     method = "POST"
     
     if event is not str:
         event = json.dumps(event, indent=4, separators=(',', ': '), ensure_ascii=False)
     #item = {"text": str(jsonformat)}
-    item = {
-        "text":str(username+"が"+event)
-    }
-    
+    if username != None:
+        item = {
+            "text":str(username+"が"+event)
+        }
+    else:
+        item = {
+            "text":str(event)
+        }
+
     #item = {"text":"Line/  "+text}
     #print("token = ",token)
     header = {"Content-Type" : "application/json"}
