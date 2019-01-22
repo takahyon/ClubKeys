@@ -7,7 +7,6 @@ import line
 import slack
 import dynamo
 import sys
-import env
 
 sys.path.append('./lib')
 
@@ -23,8 +22,9 @@ def lambda_handler(event, context):
                 line.post_sticker(events)
             else:
                 line.post_text(events)
-        return {'statusCode': 200, 'body': event, 'status':status}
+        return {'statusCode': 200, 'body': event}
     except:
+
         try:
             status = event["status"]
             try:
