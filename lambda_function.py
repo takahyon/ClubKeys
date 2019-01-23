@@ -13,11 +13,13 @@ import dynamo
 
 
 def lambda_handler(event, context):
-    slack.post_slack(str(event))
+    #slack.post_slack(str(event))
+    body = json.loads(event["body"])
+    #slack.post_slack(str(body["events"]))
     try:
-        for events in event["body"]["events"]:
+        for events in body["events"]:
             type = events["message"]["type"]
-            
+
             if type == "text":
                 line.post_text(events)
             elif type == "sticker":

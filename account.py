@@ -17,7 +17,12 @@ at = str(datetime.now())
 
 def post_account(user_id):
     line_bot_api = LineBotApi(ACCESS_TOKEN)
-    profile = line_bot_api.get_profile(user_id)
+    try:
+        profile = line_bot_api.get_profile(user_id)
+    except:
+        import traceback
+        traceback.print_exc()
+
     print(str(profile))
 
     try:

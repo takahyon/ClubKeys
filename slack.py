@@ -1,9 +1,13 @@
+from datetime import datetime
 import os
 import urllib
 import json
 import line
 
-def post_slack(event, username=None):
+nowt = str(datetime.now())[:-10]
+nowt = "[" + nowt + "]"
+
+def post_slack(event, username=None,user_pic=None):
     # TODO implement
     url = os.environ["SlackURL"]
     method = "POST"
@@ -11,13 +15,16 @@ def post_slack(event, username=None):
     if event is not str:
         event = json.dumps(event, indent=4, separators=(',', ': '), ensure_ascii=False)
     #item = {"text": str(jsonformat)}
-    if username != None:
+    if username != None and user_pic != None :
         item = {
-            "text":str(username+"が"+event)
+            "text": nowt + str(username+"が"+event),
+            'username': username,  # ユーザー名
+            'icon_emoji': user_pic,  # アイコン
+            'link_names': 1,  # 名前をリンク化
         }
     else:
         item = {
-            "text":str(event)
+            "text": nowt +str(event)
         }
 
     #item = {"text":"Line/  "+text}

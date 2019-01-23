@@ -40,23 +40,23 @@ def post_text(event):
         reply_text = str(e)
     
     if "あけ" in text or "開" in text:
-        message = str(nowt) + "  開けました！"
-        slack.post_slack(message, user_name)
+        message = "開けました！"
+        slack.post_slack(message, user_name, user_pic)
         dynamo.change_status("open")
         reply_text = "りょーかい！練習頑張って！"
     elif "かり" in text or "借" in text:
-        message = str(nowt) + "  借りました！"
-        slack.post_slack(message, user_name)
+        message = "借りました！"
+        slack.post_slack(message, user_name, user_pic)
         dynamo.change_status("borrow")
         reply_text = "借りたのねー！了解！"
     elif "かえし" in text or "返" in text:
-        message = str(nowt) + "  部室の鍵を返しました！"
-        slack.post_slack(message, user_name)
+        message = "部室の鍵を返しました！"
+        slack.post_slack(message, user_name, user_pic)
         dynamo.change_status("return")
         reply_text = "お疲れ様でしたー！"
     elif "しめ" in text or "閉" in text:
-        message = str(nowt) + "  部室閉めました！"
-        slack.post_slack(message, user_name)
+        message = "部室閉めました！"
+        slack.post_slack(message, user_name, user_pic)
         dynamo.change_status("close")
         reply_text = "おっけー！またねー"
     elif "鍵" or "かぎ" in text:
@@ -94,25 +94,40 @@ def post_sticker(event):
     reply_token = event["replyToken"]
     stid = event["message"]["stickerId"]
 
+    user_id = event["source"]["userId"]
+    profile = account.check_user(user_id)
+
+    try:
+        group_id = event["source"]["groupId"]
+    except:
+        pass
+
+    try:
+        user_name = profile['acnm']
+        user_pic = profile['user_pic']
+        print(user_name)
+    except LineBotApiError as e:
+        # error handle
+        reply_text = str(e)
+
     if stid == "23397320":
-        message = str(nowt) + "  借りました！"
-        slack.post_slack(message)
+        message = "借りました！"
+        slack.post_slack(message, user_name, user_pic)
         reply_text = "借りたのねー！了解"
         dynamo.change_status("borrow")
     elif stid == "23397321":
-        message = str(nowt) + "  返しました！"
-        slack.post_slack(message)
+        message = "返しました！"
+        slack.post_slack(message, user_name, user_pic)
         dynamo.change_status("return")
         reply_text = "お疲れ様でしたー！"
-
     elif stid == "23397327":
-        message = str(nowt) + "  部室開けました！"
-        slack.post_slack(message)
+        message = "部室開けました！"
+        slack.post_slack(message, user_name, user_pic)
         dynamo.change_status("open")
         reply_text = "りょーかい！練習頑張って"
     elif stid == "23397326":
-        message = str(nowt) + "  部室閉めました！"
-        slack.post_slack(message)
+        message = "部室閉めました！"
+        slack.post_slack(message, user_name, user_pic)
         dynamo.change_status("close")
         reply_text = "おっけー！またねー"
 
