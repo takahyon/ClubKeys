@@ -15,7 +15,7 @@ import dynamo
 def lambda_handler(event, context):
     slack.post_slack(str(event))
     try:
-        for events in event["body-json"]["events"]:
+        for events in event["body"]["events"]:
             type = events["message"]["type"]
             
             if type == "text":
