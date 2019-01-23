@@ -1,14 +1,16 @@
  # coding: utf-8
-
 import os
+import sys
+
+sd = os.path.dirname(__file__)
+sys.path.append(sd + '/lib')
+
 import urllib
 import json
 import line
 import slack
 import dynamo
-import sys
 
-sys.path.append('./lib')
 
 def lambda_handler(event, context):
     slack.post_slack(str(event))
