@@ -51,8 +51,8 @@ def check_user(user_id):
         )
         response = res['Item']
     except:
-        import traceback
-        traceback.print_exc()
+        # import traceback
+        # traceback.print_exc()
         post_account(user_id)
         response = check_user(user_id)
     return response
