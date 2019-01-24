@@ -17,14 +17,23 @@ def post_slack(event, username=None,user_pic=None):
     #item = {"text": str(jsonformat)}
     if username != None and user_pic != None :
         item = {
-            "text": nowt + str(username+"が"+event),
-            'username': username,  # ユーザー名
-            'icon_emoji': user_pic,  # アイコン
-            'link_names': 1,  # 名前をリンク化
+            'username': str(username),  # ユーザー名
+            'icon_url': user_pic,
+            'text': nowt + str(username+"が"+event),
+            "attachments": [
+                {
+                    "text": "status:{0}\nat:{1} \nuser:{2}".format(event, nowt, username)
+                },
+            ]
         }
     else:
         item = {
-            "text": nowt +str(event)
+            "text": nowt +str(event),
+            "attachments": [
+                {
+                    "text": "status:{0}\nat:{1}".format(event, nowt)
+                },
+            ]
         }
 
     #item = {"text":"Line/  "+text}

@@ -58,8 +58,12 @@ def check_user(user_id):
     except:
         # import traceback
         # traceback.print_exc()
-        post_account(user_id)
-        response = check_user(user_id)
+        try:
+            post_account(user_id)
+            response = check_user(user_id)
+        except:
+            import traceback
+            traceback.print_exc()
     return response
 
 

@@ -23,22 +23,20 @@ def post_text(event):
     reply_token = event["replyToken"]
     text = event["message"]["text"]
     user_id = event["source"]["userId"]
-    profile = account.check_user(user_id)
-
+    try:
+        profile = account.check_user(user_id)
+        user_name = profile['acnm']
+        user_pic = profile['user_pic']
+        print(user_name)
+    except:
+        user_name = None
+        user_pic = None
     
     try:
         group_id = event["source"]["groupId"]
     except:
         pass
 
-    try:
-        user_name = profile['acnm']
-        user_pic = profile['user_pic']
-        print(user_name)
-    except LineBotApiError as e:
-    # error handle
-        reply_text = str(e)
-    
     if "あけ" in text or "開" in text:
         message = "開けました！"
         slack.post_slack(message, user_name, user_pic)
@@ -95,20 +93,14 @@ def post_sticker(event):
     stid = event["message"]["stickerId"]
 
     user_id = event["source"]["userId"]
-    profile = account.check_user(user_id)
-
     try:
-        group_id = event["source"]["groupId"]
-    except:
-        pass
-
-    try:
+        profile = account.check_user(user_id)
         user_name = profile['acnm']
         user_pic = profile['user_pic']
         print(user_name)
-    except LineBotApiError as e:
-        # error handle
-        reply_text = str(e)
+    except:
+        user_name = None
+        user_pic = None
 
     if stid == "23397320":
         message = "借りました！"
@@ -154,4 +146,4 @@ def post_sticker(event):
     json_data = json.dumps(payload).encode("utf-8")
     
     #response = requests.post(REPLY_ENDPOINT, headers=LINE_API_HEADERS, data = json_data)
-    print(response.status_code)
+    #print(response.status_code)
