@@ -53,4 +53,4 @@ def get_log(room="room"):
     ScanIndexForward=False,
     Limit=15
     )
-    return list
+    return list["Items"]

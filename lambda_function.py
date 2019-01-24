@@ -15,6 +15,7 @@ import dynamo
 def lambda_handler(event, context):
     #slack.post_slack(str(event))
     #slack.post_slack(str(body["events"]))
+    list = {}
     try:
         body = json.loads(event["body"])
         for events in body["events"]:
