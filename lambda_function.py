@@ -45,7 +45,8 @@ def lambda_handler(event, context):
             
         except:
             event = dynamo.get_status()
+            list = dynamo.get_log()
             print(event)
             
         status = dynamo.get_status_raw()
-        return {'statusCode': 200, 'body': event, 'status':status}
+        return {'statusCode': 200, 'body': event, 'status':status, 'log':list}

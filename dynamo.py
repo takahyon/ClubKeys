@@ -46,3 +46,11 @@ def get_status_raw():
     status = key_status_table.get_item(Key = {"location":"room"})
     res = status["Item"]["status"]
     return res
+
+def get_log(room="room"):
+    list = key_log_table.query(
+    KeyConditionExpression=Key('location').eq(room),
+    ScanIndexForward=False,
+    Limit=15
+    )
+    return list
