@@ -28,7 +28,7 @@ def post_slack(event, username=None,user_pic=None):
         }
     else:
         item = {
-            "text": nowt +str(event),
+            "text": "",
             "attachments": [
                 {
                     "text": "status:{0}\nat:{1}".format(event, nowt)
