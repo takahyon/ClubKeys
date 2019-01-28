@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append('./lib')
 import requests
 import json
@@ -9,7 +10,6 @@ import account
 from datetime import datetime
 from linebot import LineBotApi
 from linebot.exceptions import LineBotApiError
-
 
 REPLY_ENDPOINT = 'https://api.line.me/v2/bot/message/reply'
 ACCESS_TOKEN = os.environ['LINE_CHANNEL_ACCESS_TOKEN']
@@ -31,7 +31,7 @@ def post_text(event):
     except:
         user_name = None
         user_pic = None
-    
+
     try:
         group_id = event["source"]["groupId"]
     except:
@@ -63,7 +63,7 @@ def post_text(event):
     else:
         slack.post_slack(text)
         reply_text = user_name
-        
+
     reply_text = event
     LINE_API_HEADERS = {
         "Content-Type": "application/json",
@@ -82,7 +82,7 @@ def post_text(event):
 
     json_data = json.dumps(payload).encode("utf-8")
 
-    response = requests.post(REPLY_ENDPOINT, headers=LINE_API_HEADERS, data=json.dumps(payload))
+    #response = requests.post(REPLY_ENDPOINT, headers=LINE_API_HEADERS, data=json.dumps(payload))
     print(response.status_code)
 
 
@@ -131,19 +131,19 @@ def post_sticker(event):
         "Authorization": str("Bearer " + ACCESS_TOKEN)
     }
     jsonformat = json.dumps(event, indent=4, separators=(',', ': '), ensure_ascii=False)
-    
+
     payload = {
         "replyToken": reply_token,
         "messages": [
             {
                 "type": "text",
                 "text": reply_text
-    
+
             }
         ]
     }
-    
+
     json_data = json.dumps(payload).encode("utf-8")
-    
-    #response = requests.post(REPLY_ENDPOINT, headers=LINE_API_HEADERS, data = json_data)
-    #print(response.status_code)
+
+    # response = requests.post(REPLY_ENDPOINT, headers=LINE_API_HEADERS, data = json_data)
+    # print(response.status_code)
