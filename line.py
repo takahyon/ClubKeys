@@ -83,7 +83,7 @@ def post_text(event):
     json_data = json.dumps(payload).encode("utf-8")
 
     #response = requests.post(REPLY_ENDPOINT, headers=LINE_API_HEADERS, data=json.dumps(payload))
-    print(response.status_code)
+    #print(response.status_code)
 
 
 def post_sticker(event):
